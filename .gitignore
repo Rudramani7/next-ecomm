@@ -7,4 +7,3 @@ out/
 .env.*.local
 .vscode/
 .DS_Store
-npm-debug.log*
