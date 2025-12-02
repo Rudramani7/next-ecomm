@@ -1,19 +1,12 @@
 import { NextResponse } from 'next/server';
-import { getAllProducts } from '../../../lib/api';
 
-export async function GET() {
+export async function GET(req) {
   try {
-    const products = await getAllProducts({ cache: 'no-store' });
-    return NextResponse.json({
-      ok: true,
-      count: Array.isArray(products) ? products.length : 0,
-      sample: (products || []).slice(0, 5),
-    });
+    const r = await fetch('https://fakestoreapi.com/products');
+    if (!r.ok) return NextResponse.json({ ok: false, error: 'Upstream error' }, { status: 502 });
+    const data = await r.json();
+    return NextResponse.json({ ok: true, products: data });
   } catch (err) {
-    console.error('api debug error', err);
-    return NextResponse.json(
-      { ok: false, error: String(err?.message || err) },
-      { status: 500 }
-    );
+    return NextResponse.json({ ok: false, error: String(err.message) }, { status: 500 });
   }
 }
