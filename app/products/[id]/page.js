@@ -9,7 +9,7 @@ export default async function ProductPage({ params }) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
       <div className="flex items-center justify-center">
-        <img src={product.image} alt={product.title} className="max-h-96 object-contain" />
+        <img src={product.images[0]} alt={product.title} className="max-h-96 object-contain" />
       </div>
 
       <div>

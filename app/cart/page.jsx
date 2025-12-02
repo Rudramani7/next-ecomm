@@ -44,7 +44,7 @@ export default function CartPage() {
             className="flex gap-4 items-center border rounded p-4"
           >
             <img
-              src={i.product?.image}
+              src={i.product?.images[0]}
               alt={i.product?.title}
               className="w-24 h-24 object-contain"
             />

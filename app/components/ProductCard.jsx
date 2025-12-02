@@ -10,7 +10,7 @@ export default function ProductCard({ product }) {
       <Link href={`/products/${product.id}`} className="flex-1 group">
         <div className="h-48 flex items-center justify-center mb-4">
           <img
-            src={product.image}
+            src={product.images[0]}
             alt={product.title}
             className="max-h-40 object-contain"
           />
