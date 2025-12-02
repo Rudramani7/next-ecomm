@@ -12,7 +12,7 @@ export default function HomeSearch() {
     e.preventDefault();
     if (!query.trim()) return;
     router.push(`/products?search=${encodeURIComponent(query)}`);
-  };
+  };  
 
   const clearSearch = () => {
     setQuery("");
