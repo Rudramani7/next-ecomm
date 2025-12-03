@@ -38,60 +38,73 @@ export default function CartPage() {
       <h2 className="text-2xl font-semibold mb-6">Your Cart</h2>
 
       <div className="space-y-4">
-        {items.map((i) => (
-          <div
-            key={i.id}
-            className="flex gap-4 items-center border rounded p-4"
-          >
-            <img
-              src={i.product?.images[0]}
-              alt={i.product?.title}
-              className="w-24 h-24 object-contain"
-            />
+        {items.map((i) => {
+          const price = Number(i.product?.price || 0);
+          const qty = Number(i.quantity || 0);
+          const lineTotal = (price * qty).toFixed(2);
+          const title = i.product?.title || "Product";
+          const imgSrc =
+            i.product?.images?.[0] || i.product?.image || "/placeholder.png";
 
-            <div className="flex-1 min-w-0">
-              <div className="font-medium truncate">{i.product?.title}</div>
-              <div className="mt-1 text-sm text-gray-600">
-                ${Number(i.product?.price).toFixed(2)}
+          return (
+            <div
+              key={i.id}
+              className="flex flex-col sm:flex-row sm:items-center gap-4 border rounded p-4"
+            >
+              <div className="w-full sm:w-24 h-44 sm:h-24 flex items-center justify-center bg-white">
+                <img
+                  src={imgSrc}
+                  alt={title}
+                  className="max-h-full max-w-full object-contain"
+                />
+              </div>
+
+              <div className="flex-1 min-w-0">
+                <div className="font-medium truncate">{title}</div>
+                <div className="mt-1 text-sm text-gray-600">
+                  ${price.toFixed(2)}
+                </div>
+              </div>
+
+              <div className="mt-3 sm:mt-0 flex flex-col sm:flex-row items-start sm:items-center gap-3 w-full sm:w-auto">
+                <div className="flex-1 sm:flex-none">
+                  <QuantityControl item={i} />
+                </div>
+
+                <div className="w-full sm:w-28 text-left sm:text-right font-semibold tabular-nums">
+                  ${lineTotal}
+                </div>
               </div>
             </div>
-
-            <div className="flex items-center gap-4">
-              <QuantityControl item={i} />
-
-              <div className="w-28 text-right font-semibold">
-                $
-                {(
-                  Number(i.product?.price || 0) * Number(i.quantity || 0)
-                ).toFixed(2)}
-              </div>
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       {/* Total */}
-      <div className="mt-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-        <div>
-          <div className="text-sm text-gray-600">Total</div>
-          <div className="text-2xl font-semibold">${subtotal.toFixed(2)}</div>
-        </div>
+      <div className="mt-8">
+        <div className="flex flex-col-reverse md:flex-row items-stretch md:items-center justify-between gap-4">
 
-        <div className="flex gap-3">
-          <Link
-            href="/products"
-            className="px-4 py-2 border rounded hover:bg-gray-50 transition"
-          >
-            Continue Shopping
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+            <Link
+              href="/products"
+              className="w-full sm:w-auto px-4 py-2 border rounded hover:bg-gray-50 transition text-center"
+            >
+              Continue Shopping
+            </Link>
 
-          <button
-            type="button"
-            className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition disabled:opacity-50"
-            disabled={items.length === 0}
-          >
-            Proceed to Checkout
-          </button>
+            <button
+              type="button"
+              className="w-full sm:w-auto px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition disabled:opacity-50"
+              disabled={items.length === 0}
+            >
+              Proceed to Checkout
+            </button>
+          </div>
+
+          <div className="flex-1 md:flex-none">
+            <div className="text-sm text-gray-600">Total</div>
+            <div className="text-2xl font-semibold">${subtotal.toFixed(2)}</div>
+          </div>
         </div>
       </div>
     </div>
