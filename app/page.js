@@ -7,7 +7,7 @@ export default async function HomePage() {
 
   return (
     <div className="text-center py-12">
-      <h1 className="text-4xl font-bold mb-3">Welcome to Arizon Store</h1>
+      <h1 className="text-4xl font-bold mb-3">Welcome to NewComm Store</h1>
       <p className="text-gray-600 mb-10 max-w-xl mx-auto">
         Explore products across electronics, fashion, accessories, and more.
       </p>

@@ -3,7 +3,7 @@ import Header from './components/Header';
 import CartProvider from './providers/CartProvider';
 import { cookies } from 'next/headers';
 
-export const metadata = { title: 'arizon', description: 'Simple store' };
+export const metadata = { title: 'NewComm', description: 'Simple store' };
 
 export default async function RootLayout({ children }) {
   let initialItems = [];
